@@ -12,24 +12,24 @@ const register = async (req, res) => {
     }
     const emailRegex = /^\S+@\S+\.\S+$/;
 
-if (!emailRegex.test(email)) {
-  return res.status(400).json({
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({
     message: 'Invalid email format',
   });
 }
 
-if (password.length < 6) {
-  return res.status(400).json({
-    message: 'Password must be at least 6 characters',
+   if (password.length < 6) {
+   return res.status(400).json({
+   message: 'Password must be at least 6 characters',
   });
 }
     
 
     
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email already registered' });
-    }
+   const existingUser = await User.findOne({ email });
+  if (existingUser) {
+  return res.status(400).json({ message: 'Email already registered' });
+   }
 
 
     const hashedPassword = await bcrypt.hash(password, 10);
